@@ -1,0 +1,21 @@
+{
+  "name": "killer-suite",
+  "private": true,
+  "version": "0.2.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:shopify": "pnpm --filter live-commerce dev",
+    "dev:calendly": "pnpm --filter calendly-meeting-intel dev",
+    "dev:patreon": "pnpm --filter patreon-coownership dev",
+    "dev:notion": "pnpm --filter notion-living-docs dev",
+    "dev:teachable": "pnpm --filter teachable-struggle-detector dev",
+    "dev:opentable": "pnpm --filter opentable-taste-passport dev",
+    "dev:fiverr": "pnpm --filter fiverr-squad-bidding dev",
+    "dev:mailchimp": "pnpm --filter mailchimp-send-time dev",
+    "dev:eventbrite": "pnpm --filter eventbrite-matchmaking dev",
+    "dev:linkedin": "pnpm --filter linkedin-proof-of-work dev"
+  }
+}

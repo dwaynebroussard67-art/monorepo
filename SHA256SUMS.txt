@@ -1,0 +1,3 @@
+63b279bc499c5dd71777cdd31b605ce0a8f57718c67f9c1788c925aac2d9c864  killer-suite-complete.zip
+4c129c3433620e4432063ca2c82ae3c515c565574f6ef70e04dc75d15bcebb78  killer-suite-docs-only.zip
+bce47e212cef062db759d11fe0c36c2340d723dd2277f9197270193f54eb8bcc  killer-suite-single-download.zip
