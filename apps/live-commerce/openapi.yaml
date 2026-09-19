@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: Live Social Proof Commerce API
+  version: 0.1.0
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses: { "200": { description: OK } }
+  /stores:
+    get: { summary: List stores, responses: { "200": { description: OK } } }
+    post: { summary: Create store, responses: { "201": { description: Created } } }
+  /stores/{storeId}/products:
+    get: { summary: List products, responses: { "200": { description: OK } } }
+    post: { summary: Create product, responses: { "201": { description: Created } } }
+  /stores/{storeId}/events:
+    post: { summary: Ingest storefront event batch, responses: { "202": { description: Accepted } } }
+  /stores/{storeId}/social-proof:
+    get: { summary: Confidence-scored social proof payload, responses: { "200": { description: OK } } }
+  /carts:
+    post: { summary: Create cart, responses: { "201": { description: Created } } }
+  /carts/{cartId}/items:
+    post: { summary: Add cart item, responses: { "200": { description: OK } } }
+  /carts/{cartId}/checkout:
+    post: { summary: Checkout to order, responses: { "201": { description: Created }, "409": { description: Inventory/state conflict } } }
+  /streams:
+    post: { summary: Start live stream, responses: { "201": { description: Created } } }
+  /streams/{streamId}/pin:
+    post: { summary: Pin product to stream, responses: { "200": { description: OK } } }
+  /streams/{streamId}/buy-now:
+    post: { summary: Issue single-use buy-now token, responses: { "201": { description: Created } } }
+  /streams/buy-now/{tokenId}/redeem:
+    post: { summary: Redeem buy-now token, responses: { "201": { description: Created }, "409": { description: Token used }, "410": { description: Token expired } } }

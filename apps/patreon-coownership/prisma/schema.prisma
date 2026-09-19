@@ -1,0 +1,13 @@
+// Design stub — production data model target. Scaffold uses src/lib/store.ts (in-memory).
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+model Creator { id String @id; userId String; brandName String; tiers Tier[]; programs OwnershipProgram[] }
+model Tier { id String @id; creatorId String; creator Creator @relation(fields: [creatorId], references: [id]); name String; monthlyPriceCents Int }
+model Subscription { id String @id; tierId String; fanUserId String; status String; startedAt DateTime; endedAt DateTime? }
+model EngagementEvent { id String @id; creatorId String; fanUserId String; type String; weight Int; occurredAt DateTime }
+model SuperfanScore { id String @id; creatorId String; fanUserId String; score Float; factorsJson String; updatedAt DateTime }
+model OwnershipProgram { id String @id; creatorId String; creator Creator @relation(fields: [creatorId], references: [id]); rightsType String; status String; rulesJson String }
+model LedgerEntry { id String @id; programId String; debitAccountId String; creditAccountId String; units Int; reason String; createdAt DateTime }
+model RevenuePool { id String @id; creatorId String; sourceType String; periodStart DateTime; periodEnd DateTime; distributableCents Int }
+model Distribution { id String @id; revenuePoolId String; fanUserId String; units Int; sharePercent Float; payoutCents Int }

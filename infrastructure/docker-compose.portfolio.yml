@@ -1,4 +1,10 @@
 version: "3.9"
+x-db-env: &db-env
+  DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
+x-depends: &db-deps
+  - postgres
+  - redis
+
 services:
   postgres:
     image: postgres:16
@@ -13,115 +19,87 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
+
   live-commerce:
-    build: ../apps/live-commerce
+    build: { context: .., dockerfile: apps/live-commerce/Dockerfile }
     environment:
       PORT: 4001
       APP_BASE_URL: http://localhost:4001
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4001:4001"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4001:4001"]
   calendly-meeting-intel:
-    build: ../apps/calendly-meeting-intel
+    build: { context: .., dockerfile: apps/calendly-meeting-intel/Dockerfile }
     environment:
       PORT: 4002
       APP_BASE_URL: http://localhost:4002
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4002:4002"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4002:4002"]
   patreon-coownership:
-    build: ../apps/patreon-coownership
+    build: { context: .., dockerfile: apps/patreon-coownership/Dockerfile }
     environment:
       PORT: 4003
       APP_BASE_URL: http://localhost:4003
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4003:4003"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4003:4003"]
   notion-living-docs:
-    build: ../apps/notion-living-docs
+    build: { context: .., dockerfile: apps/notion-living-docs/Dockerfile }
     environment:
       PORT: 4004
       APP_BASE_URL: http://localhost:4004
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4004:4004"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4004:4004"]
   teachable-struggle-detector:
-    build: ../apps/teachable-struggle-detector
+    build: { context: .., dockerfile: apps/teachable-struggle-detector/Dockerfile }
     environment:
       PORT: 4005
       APP_BASE_URL: http://localhost:4005
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4005:4005"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4005:4005"]
   opentable-taste-passport:
-    build: ../apps/opentable-taste-passport
+    build: { context: .., dockerfile: apps/opentable-taste-passport/Dockerfile }
     environment:
       PORT: 4006
       APP_BASE_URL: http://localhost:4006
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4006:4006"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4006:4006"]
   fiverr-squad-bidding:
-    build: ../apps/fiverr-squad-bidding
+    build: { context: .., dockerfile: apps/fiverr-squad-bidding/Dockerfile }
     environment:
       PORT: 4007
       APP_BASE_URL: http://localhost:4007
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4007:4007"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4007:4007"]
   mailchimp-send-time:
-    build: ../apps/mailchimp-send-time
+    build: { context: .., dockerfile: apps/mailchimp-send-time/Dockerfile }
     environment:
       PORT: 4008
       APP_BASE_URL: http://localhost:4008
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4008:4008"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4008:4008"]
   eventbrite-matchmaking:
-    build: ../apps/eventbrite-matchmaking
+    build: { context: .., dockerfile: apps/eventbrite-matchmaking/Dockerfile }
     environment:
       PORT: 4009
       APP_BASE_URL: http://localhost:4009
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4009:4009"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4009:4009"]
   linkedin-proof-of-work:
-    build: ../apps/linkedin-proof-of-work
+    build: { context: .., dockerfile: apps/linkedin-proof-of-work/Dockerfile }
     environment:
       PORT: 4010
       APP_BASE_URL: http://localhost:4010
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - "4010:4010"
+      <<: *db-env
+    depends_on: *db-deps
+    ports: ["4010:4010"]
+
 volumes:
   postgres_data:

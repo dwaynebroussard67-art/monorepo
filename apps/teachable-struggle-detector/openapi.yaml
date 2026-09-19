@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  title: Student Struggle Detector API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /courses:
+    get: { summary: List courses, responses: { "200": { description: OK } } }
+  /lessons/{lessonId}/events:
+    post: { summary: Ingest playback telemetry batch, responses: { "202": { description: Accepted } } }
+  /lessons/{lessonId}/quiz-attempts:
+    post: { summary: Record quiz attempt, responses: { "201": { description: Created } } }
+  /lessons/{lessonId}/analyze:
+    post: { summary: Run struggle analysis (segments + alerts + card draft), responses: { "200": { description: OK } } }
+  /lessons/{lessonId}/alerts:
+    get: { summary: Instructor alerts with evidence, responses: { "200": { description: OK } } }
+  /lessons/{lessonId}/clarification-cards:
+    get: { summary: Clarification cards, responses: { "200": { description: OK } } }
+  /clarification-cards/{cardId}/approve:
+    post: { summary: Instructor approval activates the card, responses: { "200": { description: OK } } }

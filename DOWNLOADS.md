@@ -1,18 +1,18 @@
 # Downloadable archives
 
-Generated deliverables in the workspace root:
+Archives are generated from the repository root with `make zip`.
 
-- `killer-suite-complete.zip` -> full portfolio workspace, all 10 apps, shared monorepo packages, docs, previews, CI, and infrastructure helper files
-- `killer-suite-docs-only.zip` -> documentation-only package with the master blueprint pack and root docs
-- `killer-suite-single-download/` -> single consolidated downloadable folder containing all finished products and pertinent files
-- `killer-suite-single-download.zip` -> zip archive of the single consolidated folder
-- `SHA256SUMS.txt` -> checksums for all generated archives
+- `<foldername>-complete.zip` — full portfolio workspace: all 10 apps, shared monorepo
+  packages, docs, previews, CI, and infrastructure helper files. The archive name follows
+  the cloned folder name (e.g. `monorepo-complete.zip`). Its sha256 is printed by the target.
+- `SHA256SUMS.txt` — running log of checksums for previously generated archives.
 
-## Included in the full archive / single-download folder
+## Included in the full archive
 - all 10 app folders under `apps/`
 - shared packages under `packages/`
-- `10_disruptor_blueprints.md`
-- `MASTER_CODE_SCHEMATICS.md`
+- `10_disruptor_blueprints.md`, `MASTER_CODE_SCHEMATICS.md`
 - root docs (`README.md`, `STATUS.md`, `RUNBOOK.md`, `SECURITY_BASELINE.md`, `DOWNLOADS.md`)
-- `docs/`, `infrastructure/`, `.github/workflows/`
+- `docs/`, `infrastructure/`, `.github/workflows/`, `scripts/`
 - `preview/index.html`
+
+Excluded: `.git/`, `node_modules/`, `.turbo/`, prior zips.

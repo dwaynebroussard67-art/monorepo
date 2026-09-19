@@ -1,0 +1,11 @@
+// Design stub — production data model target. Scaffold uses src/lib/store.ts (in-memory).
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+model Event { id String @id; title String; startsAt DateTime; zones VenueZone[]; attendees AttendeeProfile[] }
+model VenueZone { id String @id; eventId String; event Event @relation(fields: [eventId], references: [id]); name String; geoPolygonJson String? }
+model AttendeeProfile { id String @id; eventId String; event Event @relation(fields: [eventId], references: [id]); name String; headline String; goalsJson String; interestsJson String; company String; role String; optedIn Boolean }
+model MatchScore { id String @id; eventId String; attendeeA String; attendeeB String; score Float; rationaleJson String; suppressed Boolean }
+model TopMatchList { id String @id; eventId String; attendeeId String; matchesJson String; generatedAt DateTime }
+model ProximitySignal { id String @id; eventId String; fromId String; toId String; zoneId String; status String; createdAt DateTime }
+model Connection { id String @id; eventId String; attendeeA String; attendeeB String; createdAt DateTime }

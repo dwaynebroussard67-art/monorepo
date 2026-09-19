@@ -61,7 +61,10 @@ A multi-app venture studio workspace containing **10 disruptor SaaS product blue
 - `linkedin-proof-of-work`: artifact verification + claim extraction + evidence-backed profile scaffold
 
 ## Local workspace scripts
-Use the root `package.json` scripts or run each app directly with pnpm filtering.
+- `pnpm typecheck` — typecheck all 14 workspaces via turbo (also the CI job)
+- `pnpm test:smoke` — boots all 10 app servers in-process and asserts 70 moat/edge behaviors (`scripts/smoke-apps.ts`)
+- `pnpm dev:<product>` — run any app (see `RUNBOOK.md` for the port table)
+- `make install | typecheck | smoke | infra-up | portfolio-up | zip` — convenience targets
 
 ## Important note
 These are **serious MVP scaffolds and technical design packages**, not fully productionized shipped SaaS platforms. They are designed to accelerate execution, architecture, patent strategy discussion, and fundraising materials. Patentability notes are invention-framing guidance, **not legal advice**.

@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - packages/contracts
+          - packages/config
+          - packages/auth
+          - packages/observability
+          - apps/live-commerce
+          - apps/calendly-meeting-intel
+          - apps/patreon-coownership
+          - apps/notion-living-docs
+          - apps/teachable-struggle-detector
+          - apps/opentable-taste-passport
+          - apps/fiverr-squad-bidding
+          - apps/mailchimp-send-time
+          - apps/eventbrite-matchmaking
+          - apps/linkedin-proof-of-work
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter "./${{ matrix.target }}" typecheck

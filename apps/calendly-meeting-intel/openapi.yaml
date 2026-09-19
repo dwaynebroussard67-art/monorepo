@@ -1,0 +1,28 @@
+openapi: 3.0.3
+info:
+  title: Meeting Intelligence Scheduler API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /availability/{slug}/slots:
+    get: { summary: Available slots for event type + date, responses: { "200": { description: OK }, "404": { description: Event type not found } } }
+  /bookings:
+    get: { summary: List bookings, responses: { "200": { description: OK } } }
+    post: { summary: Create booking (triggers briefs + reminders), responses: { "201": { description: Created }, "409": { description: Slot unavailable } } }
+  /bookings/{bookingId}:
+    get: { summary: Get booking, responses: { "200": { description: OK } } }
+  /bookings/{bookingId}/cancel:
+    post: { summary: Cancel booking + reminders, responses: { "200": { description: OK } } }
+  /bookings/{bookingId}/briefs:
+    get: { summary: Dual-sided pre-meeting briefs, responses: { "200": { description: OK } } }
+  /bookings/{bookingId}/transcripts:
+    post: { summary: Ingest transcript; produces summary + action items, responses: { "201": { description: Created } } }
+  /bookings/{bookingId}/summary:
+    get: { summary: Latest post-meeting summary, responses: { "200": { description: OK } } }
+  /bookings/{bookingId}/sync/calendar:
+    post: { summary: Idempotent calendar writeback, responses: { "200": { description: Deduplicated }, "201": { description: Synced } } }
+  /bookings/{bookingId}/sync/crm:
+    post: { summary: Idempotent CRM writeback, responses: { "200": { description: Deduplicated }, "201": { description: Synced } } }
+  /bookings/{bookingId}/sync:
+    get: { summary: Sync log, responses: { "200": { description: OK } } }

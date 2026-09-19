@@ -1,0 +1,19 @@
+openapi: 3.0.3
+info:
+  title: Creator Co-Ownership API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /creators:
+    get: { summary: List creators, responses: { "200": { description: OK } } }
+  /creators/{creatorId}/engagement:
+    post: { summary: Record engagement event, responses: { "202": { description: Accepted } } }
+  /creators/{creatorId}/scores/run:
+    post: { summary: Run superfan scoring, responses: { "200": { description: OK } } }
+  /programs/{programId}/accrue:
+    post: { summary: Accrue scores into ledger units, responses: { "201": { description: Created } } }
+  /programs/{programId}/ledger:
+    get: { summary: Ledger entries, balances, invariant, responses: { "200": { description: OK } } }
+  /pools/{poolId}/distribute:
+    post: { summary: Distribute revenue pool (exact-cent), responses: { "201": { description: Created }, "409": { description: Already distributed } } }
