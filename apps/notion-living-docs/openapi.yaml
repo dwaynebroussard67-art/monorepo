@@ -1,0 +1,29 @@
+openapi: 3.0.3
+info:
+  title: Living Document Workspace API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /workspaces:
+    get: { summary: List workspaces, responses: { "200": { description: OK } } }
+    post: { summary: Create workspace, responses: { "201": { description: Created } } }
+  /workspaces/{workspaceId}/pages:
+    get: { summary: Pages with current content, responses: { "200": { description: OK } } }
+    post: { summary: Create page, responses: { "201": { description: Created } } }
+  /pages/{pageId}/content:
+    put: { summary: New version; re-extracts assertions + auto-audits, responses: { "200": { description: OK } } }
+  /workspaces/{workspaceId}/actions:
+    post: { summary: Create action, responses: { "201": { description: Created } } }
+  /actions/{actionId}:
+    patch: { summary: Open/done an action (touches it), responses: { "200": { description: OK } } }
+  /workspaces/{workspaceId}/audit:
+    post: { summary: Run contradiction/stale/dormant audit, responses: { "200": { description: OK } } }
+  /workspaces/{workspaceId}/alerts:
+    get: { summary: Open stateful alerts with evidence, responses: { "200": { description: OK } } }
+  /workspaces/{workspaceId}/health:
+    get: { summary: Workspace health score, responses: { "200": { description: OK } } }
+  /pages/{pageId}/links:
+    post: { summary: Explicit page link, responses: { "201": { description: Created }, "409": { description: Exists/cross-workspace } } }
+  /workspaces/{workspaceId}/graph:
+    get: { summary: Knowledge graph (pages + links + contradictions), responses: { "200": { description: OK } } }

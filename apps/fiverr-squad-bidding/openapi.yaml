@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  title: Collaborative Bidding API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /projects:
+    get: { summary: List projects, responses: { "200": { description: OK } } }
+  /projects/{projectId}/squad-suggestions:
+    get: { summary: Full-coverage squad suggestions ranked, responses: { "200": { description: OK } } }
+  /projects/{projectId}/squads:
+    post: { summary: Form squad (splits must sum to 100), responses: { "201": { description: Created }, "400": { description: Invalid splits/members } } }
+  /squads/{squadId}/proposals:
+    post: { summary: Save versioned shared proposal, responses: { "201": { description: Created } } }
+  /squads/{squadId}/contract:
+    post: { summary: Unified contract + escrow from role matrix, responses: { "201": { description: Created }, "409": { description: Exists } } }
+  /milestones/{milestoneId}/approve:
+    post: { summary: Release escrow into exact-cent splits, responses: { "200": { description: OK }, "409": { description: Already approved } } }
+  /contracts/{contractId}:
+    get: { summary: Contract + milestones + payouts, responses: { "200": { description: OK } } }

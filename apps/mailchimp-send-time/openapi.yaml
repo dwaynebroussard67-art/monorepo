@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+  title: Send Time Personalization API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /audiences/{audienceId}/subscribers:
+    post: { summary: Add subscriber, responses: { "201": { description: Created } } }
+  /subscribers/{subscriberId}/events:
+    post: { summary: Record open/click, responses: { "202": { description: Accepted } } }
+  /subscribers/{subscriberId}/profile/rebuild:
+    post: { summary: Build send-time profile (cold-start fallback chain), responses: { "200": { description: OK } } }
+  /campaigns:
+    post: { summary: Create campaign with send window, responses: { "201": { description: Created } } }
+  /campaigns/{campaignId}/launch:
+    post: { summary: Per-recipient argmax scheduling into queue, responses: { "200": { description: OK }, "409": { description: Already launched } } }
+  /campaigns/{campaignId}/dispatch:
+    post: { summary: Release due entries under throughput cap, responses: { "200": { description: OK } } }
+  /campaigns/{campaignId}/reflow:
+    post: { summary: Re-time pending queue for new throughput, responses: { "200": { description: OK } } }
+  /campaigns/{campaignId}/queue:
+    get: { summary: Queue view, responses: { "200": { description: OK } } }

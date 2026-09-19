@@ -1,0 +1,17 @@
+openapi: 3.0.3
+info:
+  title: Taste Profile Passport API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /restaurants:
+    get: { summary: List restaurants, responses: { "200": { description: OK } } }
+  /diners/{dinerId}/passport:
+    put: { summary: Upsert passport + consent policy, responses: { "200": { description: OK } } }
+  /reservations:
+    post: { summary: Request reservation, responses: { "201": { description: Created } } }
+  /reservations/{reservationId}/confirm:
+    post: { summary: Confirm; derives brief + issues single-use token, responses: { "200": { description: OK } } }
+  /reservations/{reservationId}/brief:
+    get: { summary: Host redeems single-use pre-arrival brief, responses: { "200": { description: OK }, "403": { description: Host role required }, "409": { description: Consumed }, "410": { description: Expired }, "425": { description: Too early } } }

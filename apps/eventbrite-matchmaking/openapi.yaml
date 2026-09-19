@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  title: Serendipity Matchmaking API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /events:
+    get: { summary: List events, responses: { "200": { description: OK } } }
+  /events/{eventId}/attendees:
+    post: { summary: Register attendee + opt-in, responses: { "201": { description: Created } } }
+  /events/{eventId}/matches/generate:
+    post: { summary: Pairwise scores + Top-5 briefs, responses: { "200": { description: OK } } }
+  /events/{eventId}/matches/{attendeeId}:
+    get: { summary: Attendee Top list, responses: { "200": { description: OK } } }
+  /events/{eventId}/signals:
+    post: { summary: Zone-gated signal to connect, responses: { "201": { description: Created }, "403": { description: Gate denied } } }
+  /signals/{signalId}/respond:
+    post: { summary: Accept/decline; accept mints connection, responses: { "200": { description: OK }, "409": { description: Already resolved } } }
+  /events/{eventId}/connections:
+    get: { summary: Connections, responses: { "200": { description: OK } } }

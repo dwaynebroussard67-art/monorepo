@@ -1,0 +1,17 @@
+openapi: 3.0.3
+info:
+  title: Proof-of-Work Profile API
+  version: 0.1.0
+paths:
+  /health:
+    get: { summary: Service health, responses: { "200": { description: OK } } }
+  /profiles:
+    post: { summary: Create profile, responses: { "201": { description: Created } } }
+  /profiles/{profileId}/challenges:
+    post: { summary: Issue live-domain nonce challenge, responses: { "201": { description: Created } } }
+  /profiles/{profileId}/artifacts:
+    post: { summary: Submit artifact through verification pipeline, responses: { "201": { description: Created (may be rejected with failed checks) } } }
+  /profiles/{profileId}/evidence-graph:
+    get: { summary: Artifacts, claims, skill evidence, credibility, responses: { "200": { description: OK } } }
+  /profiles/{profileId}/recruiter-view:
+    get: { summary: Evidence-backed skills only; self-declared quarantined, responses: { "200": { description: OK } } }

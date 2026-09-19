@@ -1,0 +1,12 @@
+// Design stub — production data model target. Scaffold uses src/lib/store.ts (in-memory).
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+model Workspace { id String @id; name String; pages Page[] }
+model Page { id String @id; workspaceId String; workspace Workspace @relation(fields: [workspaceId], references: [id]); parentId String?; title String; updatedAt DateTime; versions PageVersion[] }
+model PageVersion { id String @id; pageId String; page Page @relation(fields: [pageId], references: [id]); plainText String; createdBy String; createdAt DateTime }
+model Assertion { id String @id; workspaceId String; pageId String; versionId String; text String; claimType String; numbersJson String; tokensJson String; negated Boolean }
+model PageLink { id String @id; workspaceId String; sourcePageId String; targetPageId String; linkType String }
+model WorkspaceAction { id String @id; workspaceId String; assigneeId String; title String; status String; dueAt DateTime?; lastTouchedAt DateTime }
+model DocAlert { id String @id; workspaceId String; pageId String?; alertType String; severity String; evidenceJson String; status String; dedupeKey String @unique }
+model AuditRun { id String @id; workspaceId String; startedAt DateTime; completedAt DateTime; summaryJson String }

@@ -1,0 +1,13 @@
+// Design stub — production data model target. Scaffold uses src/lib/store.ts (in-memory).
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+model Store { id String @id; name String; domain String?; products Product[]; events VisitorEvent[]; streams LiveStream[] }
+model Product { id String @id; storeId String; store Store @relation(fields: [storeId], references: [id]); title String; priceCents Int; inventoryQty Int; status String }
+model Cart { id String @id; storeId String; customerRef String; status String; items CartItem[] }
+model CartItem { id String @id; cartId String; cart Cart @relation(fields: [cartId], references: [id]); productId String; qty Int; unitPriceCents Int }
+model Order { id String @id; storeId String; cartId String?; totalCents Int; paymentStatus String; fulfillmentStatus String; createdAt DateTime }
+model VisitorEvent { id String @id; storeId String; store Store @relation(fields: [storeId], references: [id]); productId String?; type String; anonId String; at DateTime; botScore Float? }
+model SocialProofRule { id String @id; storeId String; ruleType String; minValue Int; minConfidence Float; template String }
+model LiveStream { id String @id; storeId String; store Store @relation(fields: [storeId], references: [id]); hostId String; status String; pinnedProductId String?; startedAt DateTime }
+model BuyNowToken { id String @id; streamId String; productId String; viewerRef String; expiresAt DateTime; usedAt DateTime? }

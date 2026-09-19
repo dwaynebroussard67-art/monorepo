@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.turbo/
+*.log
+*.zip
+.env
+.DS_Store

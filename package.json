@@ -2,11 +2,18 @@
   "name": "killer-suite",
   "private": true,
   "version": "0.2.0",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
+    "typecheck": "turbo run typecheck",
+    "test:smoke": "tsx scripts/smoke-apps.ts",
+    "dev": "turbo run dev",
     "dev:shopify": "pnpm --filter live-commerce dev",
     "dev:calendly": "pnpm --filter calendly-meeting-intel dev",
     "dev:patreon": "pnpm --filter patreon-coownership dev",
@@ -17,5 +24,11 @@
     "dev:mailchimp": "pnpm --filter mailchimp-send-time dev",
     "dev:eventbrite": "pnpm --filter eventbrite-matchmaking dev",
     "dev:linkedin": "pnpm --filter linkedin-proof-of-work dev"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "turbo": "^2.1.0",
+    "typescript": "^5.5.0"
   }
 }

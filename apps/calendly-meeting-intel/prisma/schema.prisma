@@ -1,0 +1,14 @@
+// Design stub — production data model target. Scaffold uses src/lib/store.ts (in-memory).
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+model User { id String @id; email String @unique; name String; timezone String; rules AvailabilityRule[]; eventTypes EventType[] }
+model AvailabilityRule { id String @id; userId String; user User @relation(fields: [userId], references: [id]); dayOfWeek Int; startMinute Int; endMinute Int }
+model EventType { id String @id; userId String; user User @relation(fields: [userId], references: [id]); title String; durationMin Int; bufferBeforeMin Int; bufferAfterMin Int; slug String; bookings Booking[] }
+model Booking { id String @id; eventTypeId String; eventType EventType @relation(fields: [eventTypeId], references: [id]); hostUserId String; inviteeName String; inviteeEmail String; startAt DateTime; endAt DateTime; status String }
+model Participant { id String @id; bookingId String; role String; email String; fullName String; company String? }
+model PreMeetingBrief { id String @id; bookingId String; audience String; markdown String; signalsJson String; generatedAt DateTime }
+model Transcript { id String @id; bookingId String; text String; createdAt DateTime }
+model PostMeetingSummary { id String @id; bookingId String; markdown String; actionItemsJson String; generatedAt DateTime }
+model Reminder { id String @id; bookingId String; channel String; scheduledAt DateTime; sentAt DateTime?; status String }
+model SyncLog { id String @id; bookingId String; kind String; provider String; idempotencyKey String @unique; payloadJson String; status String }
